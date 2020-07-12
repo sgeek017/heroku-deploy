@@ -21,8 +21,8 @@ const addRemote = ({ app_name, buildpack }) => {
   } catch (err) {
     execSync(
       "heroku create " +
-        app_name +
-        (buildpack ? " --buildpack " + buildpack : "")
+      app_name +
+      (buildpack ? " --buildpack " + buildpack : "")
     );
     console.log("Successfully created a new heroku app");
   }
@@ -43,6 +43,7 @@ const addConfig = ({ app_name }) => {
 const createProcfile = ({ procfile, appdir }) => {
   if (procfile) {
     fs.writeFileSync(path.join(appdir, "Procfile"), procfile);
+    execSync(`git config user.email "sgeek017@gmail.com" && git config user.name "sgeek017"`);
     execSync(`git add -A && git commit -m "Added Procfile"`);
     console.log("Written Procfile with custom configuration");
   }
@@ -99,8 +100,8 @@ if (heroku.appdir) {
     heroku.appdir[0] === "." && heroku.appdir[1] === "/"
       ? heroku.appdir.slice(2)
       : heroku.appdir[0] === "/"
-      ? heroku.appdir.slice(1)
-      : heroku.appdir;
+        ? heroku.appdir.slice(1)
+        : heroku.appdir;
 }
 
 (async () => {
