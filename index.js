@@ -44,7 +44,7 @@ const createProcfile = ({ procfile, appdir }) => {
   if (procfile) {
     fs.writeFileSync(path.join(appdir, "Procfile"), procfile);
     execSync(`git config user.email "sgeek017@gmail.com" && git config user.name "sgeek017"`);
-    execSync(`git add -A && git commit -m "Added Procfile"`);
+    execSync(`git pull && git add -A && git commit -m "Added Procfile"`);
     console.log("Written Procfile with custom configuration");
   }
 };
